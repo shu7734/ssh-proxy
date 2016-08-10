@@ -1,0 +1,12 @@
+hash: fbd69d141baa121d6d821389b8249b490775391802f7eff404582719dcf9dcab
+updated: 2016-08-10T18:06:05.954362998Z
+imports:
+- name: github.com/fsouza/go-dockerclient
+  version: a53ba79627e888ef775bdcf15813f07d7a232867
+- name: golang.org/x/crypto
+  version: 5f961cd492ac9d43fc33a8ef646bae79d113fd97
+  subpackages:
+  - ssh
+- name: gopkg.in/urfave/cli.v1
+  version: 1efa31f08b9333f1bd4882d61f9d668a70cd902e
+testImports: []

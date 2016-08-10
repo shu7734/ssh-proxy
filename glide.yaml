@@ -1,0 +1,8 @@
+package: .
+import:
+- package: github.com/fsouza/go-dockerclient
+- package: golang.org/x/crypto
+  subpackages:
+  - ssh
+- package: gopkg.in/urfave/cli.v1
+  version: ~1.18.0
