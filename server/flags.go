@@ -24,5 +24,11 @@ func initFlags() []cli.Flag {
 			Usage:  "Login command",
 			EnvVar: "SHELL",
 		},
+		cli.StringFlag{
+			Name:   "host-key",
+			Value:  "built-in",
+			Usage:  "Host Key",
+			EnvVar: "HOST_SSH_KEY",
+		},
 	}
 }
