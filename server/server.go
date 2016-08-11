@@ -15,6 +15,7 @@ type Server struct {
 	app       *cli.App
 	SshConfig *ssh.ServerConfig
 	logger    *log.Logger
+	Banner    string
 }
 
 func startServer(c *cli.Context, config *Config) {
