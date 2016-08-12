@@ -4,15 +4,16 @@ import (
 	"github.com/golang/protobuf/proto"
 	"github.com/streadway/amqp"
 	"github.com/vexor/ssh-proxy/messages"
+	"log"
 	"net"
 	"os"
-	"time"
 )
 
 type RabbitMQManager struct {
 	Url        string
 	connection *amqp.Connection
 	Agent      *Agent
+	logger     *log.Logger
 }
 
 func (m *RabbitMQManager) Connect() error {

@@ -20,7 +20,7 @@ func initFlags() []cli.Flag {
 		},
 		cli.StringFlag{
 			Name:   "docker-host",
-			Value:  "/var/run/docker.sock",
+			Value:  "unix:///var/run/docker.sock",
 			Usage:  "Docker host path or url",
 			EnvVar: "DOCKER_HOST",
 		},

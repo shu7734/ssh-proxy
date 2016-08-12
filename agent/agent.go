@@ -31,16 +31,23 @@ func (a Agent) failOnError(err error, message string) {
 }
 
 func startAgent(c *cli.Context, config *Config) {
+	logger := log.New(c.App.Writer, "AGENT: ", log.Ldate|log.Ltime|log.Lshortfile)
 	agent := Agent{
 		config: config,
 		app:    c.App,
-		logger: log.New(c.App.Writer, "AGENT: ", log.Ldate|log.Ltime|log.Lshortfile),
+		logger: logger,
 	}
 	agent.RManager = &RabbitMQManager{
-		Url:   config.RabbitmqUrl,
-		Agent: &agent,
+		Url:    config.RabbitmqUrl,
+		Agent:  &agent,
+		logger: logger,
 	}
-	agent.DManager = &DockerManager{Host: config.DockerHost}
+	docker_manager, err := NewDockerManager(config.DockerHost, logger)
+	if err != nil {
+		agent.Fatalf("Cannot get docker info: %s", err)
+	}
+	agent.DManager = docker_manager
+
 	agent.start()
 }
 
