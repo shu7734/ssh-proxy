@@ -23,6 +23,12 @@ func (a Agent) Fatalf(format string, v ...interface{}) {
 	os.Exit(1)
 }
 
+func (a Agent) failOnError(err error, message string) {
+	if err != nil {
+		a.Fatalf("%s: %s", message, err)
+	}
+}
+
 func startAgent(c *cli.Context, config *Config) {
 	agent := Agent{
 		config: config,

@@ -11,7 +11,7 @@ import (
 )
 
 type Server struct {
-	config    *Config
+	Config    *Config
 	app       *cli.App
 	SshConfig *ssh.ServerConfig
 	logger    *log.Logger
@@ -21,7 +21,7 @@ type Server struct {
 func startServer(c *cli.Context, config *Config) {
 	server := Server{
 		app:    c.App,
-		config: config,
+		Config: config,
 		logger: log.New(c.App.Writer, "SERVER: ", log.Ldate|log.Ltime|log.Lshortfile),
 	}
 	server.SshConfig = &ssh.ServerConfig{
@@ -48,8 +48,24 @@ func (s Server) Logf(format string, v ...interface{}) {
 	s.logger.Printf(format, v)
 }
 
+func (s Server) Fatalf(format string, v ...interface{}) {
+	s.Logf(format, v)
+	os.Exit(1)
+}
+
+func (s Server) failOnError(err error, message string) {
+	if err != nil {
+		s.Fatalf("%s: %s", message, err)
+	}
+}
+
+func (s Server) receiveAgents() {
+	agents_receiver := NewAgentsReceiver(&s)
+	go agents_receiver.receive()
+}
+
 func (s Server) initListener() {
-	bindAddress := s.config.BindAddress
+	bindAddress := s.Config.BindAddress
 	listener, err := net.Listen("tcp", bindAddress)
 	if err != nil {
 		s.Logf("Failed to start listener on %q: %v", bindAddress, err)
@@ -68,6 +84,7 @@ func (s Server) initListener() {
 }
 
 func (s Server) start() {
+	s.receiveAgents()
 	s.initListener()
 }
 

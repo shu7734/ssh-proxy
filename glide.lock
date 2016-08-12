@@ -1,5 +1,5 @@
 hash: 7c925fe95fded4c92d0809c3d511e9e6ffe90af7f73636112bc19f9f2cf5a3b0
-updated: 2016-08-12T10:04:39.49194331Z
+updated: 2016-08-12T10:31:18.230745894Z
 imports:
 - name: github.com/flynn/go-shlex
   version: 3f9db97f856818214da2e1057f8ad84803971cff
@@ -13,6 +13,10 @@ imports:
   version: ce7fa45920dc37a92de8377972e52bc55ffa8d57
 - name: github.com/streadway/amqp
   version: 2e25825abdbd7752ff08b270d313b93519a0a232
+- name: github.com/vexor/ssh-proxy
+  version: 461593669593bc943b082cf43f7b8fd83ebee125
+  subpackages:
+  - messages
 - name: golang.org/x/crypto
   version: 595bbbd7f5f308415a544d3c55743c91427c8d99
   subpackages:
