@@ -51,15 +51,21 @@ func (r AgentsReceiver) receive() {
 		nil,    // args
 	)
 	r.server.failOnError(err, "Failed to register a consumer")
+
+	agents_consumer := &AgentsConsumer{
+		server:       r.server,
+		node_storage: NewNodeStorage(),
+	}
+
 	forever := make(chan bool)
 
 	go func() {
 		for d := range msgs {
-			p := &messages.NodeInfo{}
-			if err := proto.Unmarshal(d.Body, p); err != nil {
+			node_info := &messages.NodeInfo{}
+			if err := proto.Unmarshal(d.Body, node_info); err != nil {
 				r.server.Fatalf("Failed to parse NodeInfo:", err)
 			}
-			r.server.Logf("Received a message: %s", p)
+			agents_consumer.Apply(node_info)
 		}
 	}()
 	r.server.Logf(" [*] Waiting for messages. To exit press CTRL+C")

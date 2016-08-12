@@ -11,7 +11,8 @@ type Agent struct {
 	app      *cli.App
 	logger   *log.Logger
 	hostname string
-	Manager  *RabbitMQManager
+	RManager *RabbitMQManager
+	DManager *DockerManager
 }
 
 func (a Agent) Logf(format string, v ...interface{}) {
@@ -35,17 +36,22 @@ func startAgent(c *cli.Context, config *Config) {
 		app:    c.App,
 		logger: log.New(c.App.Writer, "AGENT: ", log.Ldate|log.Ltime|log.Lshortfile),
 	}
-	agent.Manager = &RabbitMQManager{
+	agent.RManager = &RabbitMQManager{
 		Url:   config.RabbitmqUrl,
 		Agent: &agent,
 	}
+	agent.DManager = &DockerManager{Host: config.DockerHost}
 	agent.start()
 }
 
 func (a *Agent) start() {
-	err := a.Manager.Register()
+	err := a.RManager.Register()
 	if err != nil {
 		a.Fatalf("RabbitMQ registration error: %v", err)
 
 	}
+}
+
+func (a *Agent) ContainerIds() []string {
+	return a.DManager.RunningContainers()
 }

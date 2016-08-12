@@ -6,6 +6,7 @@ import (
 	"github.com/vexor/ssh-proxy/messages"
 	"net"
 	"os"
+	"time"
 )
 
 type RabbitMQManager struct {
@@ -45,7 +46,8 @@ func (m *RabbitMQManager) PushNodeInformation() error {
 	}
 
 	node_info := messages.NodeInfo{
-		Host: proto.String(hosts[0]),
+		Host:       proto.String(hosts[0]),
+		Containers: m.Agent.ContainerIds(),
 	}
 
 	m.Agent.Logf("Hostname: %v", node_info.GetHost())

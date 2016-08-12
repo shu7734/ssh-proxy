@@ -1,15 +1,19 @@
 package main
 
+import (
+	"github.com/fsouza/go-dockerclient"
+)
+
 type DockerManager struct {
-	Host string
+	client *docker.Client
 }
 
 func NewDockerManager(host string) *DockerManager {
 	return &DockerManager{
-		Host: host,
+		client: docker.NewClient(host),
 	}
 }
 
 func (d *DockerManager) RunningContainers(prefix string) []string {
-	return []string{}
+	return []string{"TestMe"}
 }
