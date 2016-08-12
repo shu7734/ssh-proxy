@@ -30,5 +30,11 @@ func initFlags() []cli.Flag {
 			Usage:  "Host Key",
 			EnvVar: "HOST_SSH_KEY",
 		},
+		cli.StringFlag{
+			Name:   "rabbitmq-url",
+			Value:  "amqp://guest:guest@localhost:5672/",
+			Usage:  "RabbitMQ url",
+			EnvVar: "RABBITMQ_URL",
+		},
 	}
 }

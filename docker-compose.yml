@@ -1,0 +1,15 @@
+version: "2"
+services:
+  rabbitmq:
+    image: rabbitmq
+  agent:
+    build: .
+    command: tail -f /dev/null
+    working_dir: /go/src/app
+    environment:
+      RABBITMQ_URL: amqp://rabbitmq:5672/
+    depends_on:
+      - rabbitmq
+    volumes:
+      - ./:/go/src/app
+      - /var/run/docker.sock:/var/run/docker.sock

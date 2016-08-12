@@ -1,0 +1,6 @@
+package node;
+
+message NodeInfo {
+  required string hostname = 1;
+  repeated string containers = 2;
+}

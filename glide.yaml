@@ -6,3 +6,7 @@ import:
   - ssh
 - package: gopkg.in/urfave/cli.v1
   version: ~1.18.0
+- package: github.com/streadway/amqp
+- package: github.com/golang/protobuf
+  subpackages:
+  - proto

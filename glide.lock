@@ -1,14 +1,20 @@
-hash: fbd69d141baa121d6d821389b8249b490775391802f7eff404582719dcf9dcab
-updated: 2016-08-11T13:08:23.392721352Z
+hash: 7c925fe95fded4c92d0809c3d511e9e6ffe90af7f73636112bc19f9f2cf5a3b0
+updated: 2016-08-12T10:04:39.49194331Z
 imports:
 - name: github.com/flynn/go-shlex
   version: 3f9db97f856818214da2e1057f8ad84803971cff
 - name: github.com/fsouza/go-dockerclient
   version: a53ba79627e888ef775bdcf15813f07d7a232867
+- name: github.com/golang/protobuf
+  version: 2c1988e8c18d14b142c0b472624f71647cf39adb
+  subpackages:
+  - proto
 - name: github.com/kr/pty
   version: ce7fa45920dc37a92de8377972e52bc55ffa8d57
+- name: github.com/streadway/amqp
+  version: 2e25825abdbd7752ff08b270d313b93519a0a232
 - name: golang.org/x/crypto
-  version: 5f961cd492ac9d43fc33a8ef646bae79d113fd97
+  version: 595bbbd7f5f308415a544d3c55743c91427c8d99
   subpackages:
   - curve25519
   - ed25519
