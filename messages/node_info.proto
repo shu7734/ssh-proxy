@@ -1,4 +1,4 @@
-package node;
+package messages;
 
 message NodeInfo {
   required string hostname = 1;
