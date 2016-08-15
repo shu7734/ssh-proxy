@@ -13,3 +13,5 @@ services:
     volumes:
       - ./:/go/src/app
       - /var/run/docker.sock:/var/run/docker.sock
+    ports:
+      - "2222:2222"

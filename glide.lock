@@ -1,6 +1,8 @@
 hash: 7c925fe95fded4c92d0809c3d511e9e6ffe90af7f73636112bc19f9f2cf5a3b0
-updated: 2016-08-12T15:22:01.338112394Z
+updated: 2016-08-15T13:16:38.312687994Z
 imports:
+- name: github.com/dmcgowan/msgpack
+  version: b2a415181d61dad392b5e98e65b0cf7d73e606e7
 - name: github.com/docker/docker
   version: d8240c8e27b625c6c2b7982e2473cce46e2a9ddc
   subpackages:
@@ -22,6 +24,14 @@ imports:
   - types/versions
 - name: github.com/docker/go-units
   version: eb879ae3e2b84e2a142af415b679ddeda47ec71c
+- name: github.com/docker/libchan
+  version: 0328dcec840a0659448faf08af087135fffb7fde
+  subpackages:
+  - spdy
+- name: github.com/docker/spdystream
+  version: 449fdfce4d962303d702fec724ef0ad181c92528
+  subpackages:
+  - spdy
 - name: github.com/flynn/go-shlex
   version: 3f9db97f856818214da2e1057f8ad84803971cff
 - name: github.com/fsouza/go-dockerclient

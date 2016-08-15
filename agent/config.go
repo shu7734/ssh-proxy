@@ -5,15 +5,17 @@ import (
 )
 
 type Config struct {
-	BindAddress string
-	RabbitmqUrl string
-	DockerHost  string
+	BindAddress     string
+	BindCommandPort int
+	RabbitmqUrl     string
+	DockerHost      string
 }
 
 func newConfig(c *cli.Context) *Config {
 	return &Config{
-		BindAddress: c.String("bind-address"),
-		RabbitmqUrl: c.String("rabbitmq-url"),
-		DockerHost:  c.String("docker-host"),
+		BindAddress:     c.String("bind-address"),
+		BindCommandPort: c.Int("bind-command-port"),
+		RabbitmqUrl:     c.String("rabbitmq-url"),
+		DockerHost:      c.String("docker-host"),
 	}
 }

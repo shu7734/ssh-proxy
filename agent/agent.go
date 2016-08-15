@@ -42,7 +42,7 @@ func startAgent(c *cli.Context, config *Config) {
 		Agent:  &agent,
 		logger: logger,
 	}
-	docker_manager, err := NewDockerManager(config.DockerHost, logger)
+	docker_manager, err := NewDockerManager(config.DockerHost, config.BindCommandPort, logger)
 	if err != nil {
 		agent.Fatalf("Cannot get docker info: %s", err)
 	}

@@ -18,6 +18,12 @@ func initFlags() []cli.Flag {
 			Usage:  "Bind address",
 			EnvVar: "BIND_ADDRESS",
 		},
+		cli.IntFlag{
+			Name:   "bind-command-port",
+			Value:  9323,
+			Usage:  "Docker host path or url",
+			EnvVar: "DOCKER_HOST",
+		},
 		cli.StringFlag{
 			Name:   "docker-host",
 			Value:  "unix:///var/run/docker.sock",
