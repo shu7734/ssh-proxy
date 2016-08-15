@@ -6,8 +6,9 @@ import (
 )
 
 type DockerManager struct {
-	client *docker.Client
-	logger *log.Logger
+	client   *docker.Client
+	logger   *log.Logger
+	listener chan *docker.APIEvents
 }
 
 func NewDockerManager(host string, logger *log.Logger) (*DockerManager, error) {
@@ -16,8 +17,9 @@ func NewDockerManager(host string, logger *log.Logger) (*DockerManager, error) {
 		return nil, err
 	}
 	return &DockerManager{
-		client: client,
-		logger: logger,
+		client:   client,
+		logger:   logger,
+		listener: make(chan *docker.APIEvents, 10),
 	}, nil
 }
 
@@ -35,4 +37,28 @@ func (d *DockerManager) RunningContainers() []string {
 
 	return ids
 
+}
+
+func (d *DockerManager) start(rmanager *RabbitMQManager) error {
+	go d.manageEvents(rmanager)
+	err := d.client.AddEventListener(d.listener)
+	return err
+}
+
+func (d *DockerManager) stop() error {
+	if d.listener == nil {
+		return nil
+	}
+	err := d.client.RemoveEventListener(d.listener)
+	return err
+}
+
+func (d *DockerManager) manageEvents(rmanager *RabbitMQManager) {
+	for {
+		event := <-d.listener
+		if event.Type == "container" && (event.Status == "start" || event.Status == "destroy") {
+			d.logger.Printf("Event: %v", event)
+			rmanager.Register()
+		}
+	}
 }

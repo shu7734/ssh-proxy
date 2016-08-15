@@ -57,6 +57,11 @@ func (a *Agent) start() {
 		a.Fatalf("RabbitMQ registration error: %v", err)
 
 	}
+	a.DManager.start(a.RManager)
+	// TODO: rewrite infinity loop
+	for {
+
+	}
 }
 
 func (a *Agent) ContainerIds() []string {

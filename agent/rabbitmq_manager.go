@@ -94,7 +94,7 @@ func (m *RabbitMQManager) Register() error {
 		return err
 	}
 	defer m.Disconnect()
-	m.Agent.Logf("RammitMQ connection SUCCESSED")
+	m.Agent.Logf("RabbitMQ connection SUCCESSED")
 	m.PushNodeInformation()
 
 	return nil
